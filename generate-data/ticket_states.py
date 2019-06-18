@@ -3,15 +3,21 @@ from state import State
 from activity import getActivity
 
 class OpenState(State):
-    def on_event(self, event):
+    def initialize_activity():
+        return(getActivity('Waiting On Customer'))
+    def on_event(self, event, baseTs):
         if event == 'answer':
             return {
                 'state':WaitingOnCustomerState(),
-                'activity':getActivity('Open'),
+                'activity':getActivity('Waiting On Customer',baseTs),
                 'complete':False
             }
         elif event == 'invalid':
-            return ClosedState()
+            return {
+                'state':ClosedState(),
+                'activity':getActivity('Closed',baseTs),
+                'complete':False
+            }
 
         return self
 
