@@ -4,7 +4,7 @@ Repo for code to generate and store example Freshdesk ticket activity data
 
 ## Software Requirements
 * python >= 3.7
-* sqlite3 >= 3.5
+* sqlite3 >= 3.28
 
 Note that some queries use window functions, which have only been supported in sqlite since version 3.5, please ensure that sqlite3 is at the appropriate version.
 
