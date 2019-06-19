@@ -4,7 +4,7 @@ with activity_ranked as
   , s.status_desc
   , ta.performed_at_ts
   , row_number() over ( partition by ta.ticket_id order by ta.performed_at_ts ) as activity_rank
-  --, row_number() over ( partition by ta.ticket_id, s.status_desc order by ta.performed_at_ts ) as activity_status_rank
+  , row_number() over ( partition by ta.ticket_id, s.status_desc order by ta.performed_at_ts ) as activity_status_rank
 from
   freshdesk_ticket_activity ta
   join
@@ -16,17 +16,17 @@ select
   , time_spent_open
   , time_spent_waiting_on_customer
   , time_spent_waiting_for_response
-  , (julianday(end_ts) - julianday(start_ts))*1440            as time_to_resolution
-  , (julianday(first_response_ts) - julianday(start_ts))*1440 as time_to_first_response
+  , round ( (julianday(end_ts) - julianday(start_ts))*1440 )            as time_to_resolution
+  , round ( (julianday(first_response_ts) - julianday(start_ts))*1440 ) as time_to_first_response
 from
   ( select
       t.ticket_id
     , t.start_ts
     , t.end_ts
-    , min ( a.next_activity_ts )                                                              as first_response_ts
-    , sum ( case when a.status_desc = 'Open' then next_activity_minutes end )                 as time_spent_open
-    , sum ( case when a.status_desc = 'Waiting On Customer' then next_activity_minutes end )  as time_spent_waiting_on_customer
-    , sum ( case when a.status_desc = 'Pending' then next_activity_minutes end )              as time_spent_waiting_for_response
+    , min ( a.next_activity_ts )                                                                        as first_response_ts
+    , round ( sum ( case when a.status_desc = 'Open' then next_activity_minutes end ) )                 as time_spent_open
+    , round ( sum ( case when a.status_desc = 'Waiting On Customer' then next_activity_minutes end ) )  as time_spent_waiting_on_customer
+    , round ( sum ( case when a.status_desc = 'Pending' then next_activity_minutes end ) )              as time_spent_waiting_for_response
   from
     freshdesk_ticket t
     join

@@ -17,12 +17,13 @@ These scripts have been tested using Ubuntu, results may vary in Windows or MacO
 
 ## Overview
 
-
 ### Data generation
 
 The following state machine has been implemented to generate freshdesk data.
 
-![State Machine](https://github.com/mantmic/freshdesk-data/raw/master/src/common/images/FreshDesk%20state%20machine.png "Freshdesk state machine")
+![State Machine](https://raw.githubusercontent.com/mantmic/freshdesk-data/master/images/FreshDesk%20state%20machine.png)
+
+
 
 Transitions between states are randomly chosen until a state is reached where there are no more transitions.
 
@@ -98,6 +99,6 @@ sqlite3 test.db
 To output the ticket data summary report run the following
 
 ```
-sqlite3 test.db
+sqlite3 test.db -header
 .read sql/ticket_summary.sql
 ```
