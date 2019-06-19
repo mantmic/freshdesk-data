@@ -11,6 +11,7 @@ These scripts have been tested using Ubuntu, results may vary in Windows or MacO
 ### Python packages
 * numpy
 * random
+* sqlite3
 
 
 ## Overview
