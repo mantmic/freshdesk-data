@@ -6,8 +6,6 @@ Repo for code to generate and store example Freshdesk ticket activity data
 * python >= 3.7
 * sqlite3 >= 3.28
 
-Note that some queries use window functions, which have only been supported in sqlite since version 3.5, please ensure that sqlite3 is at the appropriate version.
-
 These scripts have been tested using Ubuntu, results may vary in Windows or MacOS.
 
 ### Python packages
