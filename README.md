@@ -41,11 +41,12 @@ This codebase contains scripts to
 4. Normalize freshdesk data into a relational structure
 5. Generate a ticket summary report
 
-To run all of the steps end to end, run the run_script.sh script.
+To run all of the steps end to end, run the Makefile in this directory.
 
 ```
+git clone https://github.com/mantmic/freshdesk-data
 cd freshdesk-data
-bash run_script.sh
+make
 ```
 
 
